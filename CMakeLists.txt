@@ -44,13 +44,15 @@ link_directories(${SDK_INSTALL_DIR}/lib)
 # add YAML (build from source)
 include(ExternalProject)
 ExternalProject_Add(yaml
-    SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/third_party/yaml-cpp
+    SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/yaml-cpp
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+    GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+    GIT_TAG yaml-cpp-0.6.2
     BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/build_yaml
     INSTALL_COMMAND ""
     )
-include_directories(${CMAKE_CURRENT_LIST_DIR}/third_party/yaml-cpp/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/yaml-cpp/include)
 
 # Required for gtest
 find_package(Threads)
