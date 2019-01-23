@@ -52,6 +52,20 @@ ExternalProject_Add(yaml
 	)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/third_party/yaml-cpp/include)
 
+# Required for gtest
+find_package(Threads)
+
+# Add Google-Test (build from source)
+ExternalProject_Add(googletest
+	SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/third_party/gtest
+	CMAKE_ARGS
+		-DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+    GIT_REPOSITORY    https://github.com/google/googletest.git
+    GIT_TAG           release-1.8.1
+	BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/build_gtest
+    INSTALL_COMMAND   ""
+    )
+include_directories(${CMAKE_CURRENT_LIST_DIR}/third_party/gtest/googletest/include)
 
 add_executable(mavlink_testing_suite
     src/main.cpp
@@ -60,7 +74,10 @@ add_executable(mavlink_testing_suite
     src/tests/mission.cpp
     src/tests/param.cpp
 )
-add_dependencies(mavlink_testing_suite yaml)
+add_dependencies(mavlink_testing_suite
+    yaml
+    googletest
+    )
 
 target_link_libraries(mavlink_testing_suite
     dronecode_sdk
@@ -68,6 +85,9 @@ target_link_libraries(mavlink_testing_suite
 	dronecode_sdk_mission
 	dronecode_sdk_params_raw
 	${CMAKE_CURRENT_BINARY_DIR}/build_yaml/libyaml-cpp.a
+    ${CMAKE_CURRENT_BINARY_DIR}/build_gtest/googlemock/gtest/libgtest.a
+    ${CMAKE_CURRENT_BINARY_DIR}/build_gtest/googlemock/gtest/libgtest_main.a
+    ${CMAKE_THREAD_LIBS_INIT}
 )
 
 find_program(CLANG_FORMAT_EXECUTABLE

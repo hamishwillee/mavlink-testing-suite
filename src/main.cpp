@@ -18,6 +18,16 @@ using namespace std::chrono;
 #define TELEMETRY_CONSOLE_TEXT "\033[34m"  // Turn text on console blue
 #define NORMAL_CONSOLE_TEXT "\033[0m"      // Restore normal console colour
 
+#include "gtest/gtest.h"
+
+TEST(Dummy, foobar)
+{
+    // Add your test code here...
+    EXPECT_EQ(1, 1);
+}
+
+
+#if 0
 void componentDiscovered(ComponentType component_type)
 {
     std::cout << NORMAL_CONSOLE_TEXT << "Discovered a component with type "
@@ -98,3 +108,4 @@ int main(int argc, char** argv)
 
     return failed ? -1 : 0;
 }
+#endif
