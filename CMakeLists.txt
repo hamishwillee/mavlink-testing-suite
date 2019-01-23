@@ -57,7 +57,7 @@ find_package(Threads)
 
 # Add Google-Test (build from source)
 ExternalProject_Add(googletest
-    SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/third_party/gtest
+    SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
     GIT_REPOSITORY    https://github.com/google/googletest.git
@@ -65,7 +65,7 @@ ExternalProject_Add(googletest
     BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/build_gtest
     INSTALL_COMMAND   ""
     )
-include_directories(${CMAKE_CURRENT_LIST_DIR}/third_party/gtest/googletest/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest/googletest/include)
 
 add_executable(mavlink_testing_suite
     src/main.cpp
