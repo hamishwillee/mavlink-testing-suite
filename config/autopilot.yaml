@@ -1,8 +1,12 @@
-tests:
-    - name: Mission
-      num_waypoints: 50
+connection:
+    uri: "udp://"
 
-    - name: ParamChange
-      param_name: SYS_HITL
-      param_set_value: 1
-      param_reset_value: 0
+tests:
+    Mission:
+        - num_waypoints: 50
+
+    ParamChange:
+        - param_name: CBRK_USB_CHK
+        - param_set_value: 0
+        - param_reset_value: 42
+

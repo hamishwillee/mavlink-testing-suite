@@ -1,4 +1,5 @@
 
+#include "autopilot_test.h"
 #include "mission.h"
 #include <future>
 #include <iostream>
@@ -9,7 +10,8 @@ using namespace std;
 
 namespace tests
 {
-REGISTER_TEST(Mission);
+
+REGISTER_TEST(AutopilotTest, Mission)
 
 Mission::Mission(const Context& context) : TestBase(context), _mission(context.system) {}
 
@@ -22,7 +24,7 @@ shared_ptr<dcsdk::MissionItem> Mission::makeMissionItem(double latitude_deg, dou
     return new_item;
 }
 
-TestBase::Result Mission::run()
+void Mission::run()
 {
     mission_items items = assembleMissionItems();
 
@@ -30,8 +32,6 @@ TestBase::Result Mission::run()
     mission_items downloaded_items = downloadMission();
 
     compareMissions(items, downloaded_items);
-
-    return Result::Success;
 }
 
 mission_items Mission::assembleMissionItems()
@@ -112,3 +112,4 @@ void Mission::compareMissions(const mission_items& items_a, const mission_items&
 }
 
 }  // namespace tests
+

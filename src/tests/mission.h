@@ -10,10 +10,7 @@ using mission_items = std::vector<std::shared_ptr<dcsdk::MissionItem>>;
 
 namespace tests
 {
-/**
- * @class Mission
- * Test Mission Upload
- */
+
 class Mission : public TestBase
 {
 public:
@@ -26,7 +23,7 @@ public:
     explicit Mission(const Context& context);
     ~Mission() override = default;
 
-    Result run() override;
+    void run() override;
 
 protected:
     void serialize(ConfigProvider& c) override { _config.serialize(c); }
@@ -43,5 +40,6 @@ private:
     dcsdk::Mission _mission;
     Config _config;
 };
+
 
 }  // namespace tests

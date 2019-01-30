@@ -73,6 +73,8 @@ add_executable(mavlink_testing_suite
     src/main.cpp
 
     src/tests/base.cpp
+    src/tests/config.cpp
+    src/tests/autopilot_test.cpp
     src/tests/mission.cpp
     src/tests/param.cpp
 )
